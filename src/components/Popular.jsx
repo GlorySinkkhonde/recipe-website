@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 
+import styled from "styled-components";
+
+//splide is the carousel component and splideslide is the individual slide or image
+
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+
+import '@splidejs/react-splide/css';
+
 
 function Popular() {
 
@@ -35,21 +43,46 @@ function Popular() {
 
     //{recipe.title is deconstruction}
 
+    //the key is so that each recipe/recipe title has a unique identifier so that it is identified easily in case it is modified or changed
 
     <div>
-
-        {popular.map(recipe =>{
-            return(
-
-                //the key is so that each recipe/recipe title has a unique identifier so that it is identified easily in case it is modified or changed
-
-                <div key={recipe.id}>
-                    <h1>{recipe.title}</h1>
-                </div>
-            )
-        })}
-    </div>
+        <Wrapper>
+            <h3>Popular Picks</h3>
+ 
+                <Splide>
+                  {popular.map(recipe =>{
+                     return(
+ 
+                         <SplideSlide>
+                            <Card>
+                              <h4>{recipe.title}</h4>
+                              <img src={recipe.image} alt={recipe.title} />
+                            </Card>
+                         </SplideSlide>
+                        
+                     )
+                  })}
+                </Splide>
+ 
+        </Wrapper>
+    </div>     
+    
   )
 }
+
+const Wrapper = styled.div`
+    margin: 4rem 0rem;
+`
+
+const Card = styled.div`
+    min-height: 25rem;
+    border-radius: 2rem;
+    overflow: hidden;
+
+    img{
+        border-radius: 2rem;
+    }
+
+`
 
 export default Popular
