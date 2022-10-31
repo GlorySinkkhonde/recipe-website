@@ -41,7 +41,7 @@ function Popular() {
         {popular.map(recipe =>{
             return(
 
-                //the key is so that each recipe/recipe title has a unique identifier so that it is identified easily in case it is modified
+                //the key is so that each recipe/recipe title has a unique identifier so that it is identified easily in case it is modified or changed
 
                 <div key={recipe.id}>
                     <h1>{recipe.title}</h1>
