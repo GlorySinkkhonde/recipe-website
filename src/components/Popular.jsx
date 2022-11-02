@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-
 import styled from "styled-components";
+import { Link } from 'react-router-dom'
 
 //splide is the carousel component and splideslide is the individual slide or image
 
@@ -44,16 +44,18 @@ function Popular() {
         
             const data = await getApi.json();
 
-            localStorage.setItem("popular", JSON.stringify(data.recipes))
-
              // never use popular = data... go through the function instead
+
+             localStorage.setItem("popular", JSON.stringify(data.recipes))
 
              setPopular(data.recipes)
              console.log(data.recipes)
         }
-
-
-    }
+           
+     
+           
+        }
+    
 
   return (
 
@@ -68,7 +70,7 @@ function Popular() {
             <h3>Popular Picks</h3>
  
                 <Splide options={{
-                    perPage: 3,
+                    perPage: 4,
                     arrows: false,
                     pagination: false,
                     drag: 'free',
@@ -79,9 +81,13 @@ function Popular() {
  
                          <SplideSlide key={recipe.id}>
                             <Card>
-                              <h4>{recipe.title}</h4>
-                              <img src={recipe.image} alt={recipe.title} />
-                              <Gradient/>
+                                <Link to={'/recipe/' + recipe.id}>
+                                   <h4>{recipe.title}</h4>
+                                   <img src={recipe.image} alt={recipe.title} />
+                                   <Gradient/>
+                                </Link>
+                              
+                              
                             </Card>
                          </SplideSlide>
                         
@@ -144,3 +150,22 @@ const Gradient = styled.div`
 `
 
 export default Popular
+/*
+
+<NavLink to={'/cuisine/American'}>
+            <FaHamburger />
+            <h4>American</h4>
+        </NavLink>
+        <NavLink to={'/cuisine/American'}>
+            <FaPizzaSlice />
+            <h4>Italian</h4>
+        </NavLink>
+        <NavLink to={'/cuisine/American'}>
+            <GiChopsticks />
+            <h4>Japanese</h4>
+        </NavLink>
+        <NavLink to={'/cuisine/American'}>
+            <GiNoodles />
+            <h4>Thai</h4>
+        </NavLink>
+*/
